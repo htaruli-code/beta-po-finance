@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================================
      client.html
-     Version : 2.7
+     Version : 2.8
      Updated : 2026-04-17
      Changes :
        v2.1 -- Fix CH8: refreshOverview() GET_CLIENT_INIT 1 call.
@@ -9,7 +9,10 @@
        v2.4 -- Fix CH11: RESERVE_DEPOSIT in TYPE_META and filter.
        v2.5 -- Fix CH12: loadReserveHistory() uses GET_RESERVE_INIT.
        v2.6 -- Arctic Clarity: styles.css v1.9 + navbar.js v2.2.
-       v2.7 -- Fix CH13: replaced remaining hardcoded hex colours in
+       v2.7 -- Fix CH13: inline hex -> Arctic tokens.
+       v2.8 -- Fix CH14: dark sidebar remnants removed. User-badge
+               border var(--ink-08). Client selector uses form-control
+               class with Arctic light styling. styles.css now v2.0. replaced remaining hardcoded hex colours in
                inline <style> block and JS template literals with
                Arctic CSS tokens. #f0f3f7→var(--ink-08),
                #EBF4FB/#E8F8F5/#FEF6E7→Arctic badge tokens,
@@ -22,10 +25,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Client Portal — PO Financing Portal v4</title>
-  <link rel="stylesheet" href="/css/styles.css?v=1.9">
+  <link rel="stylesheet" href="/css/styles.css?v=2.0">
   <!-- Fix N2: opt-in to auth gate — must be set BEFORE navbar.js loads -->
   <script>window.POF_REQUIRE_AUTH = true;</script>
-  <script src="/js/config.js?v=1.9"></script>
+  <script src="/js/config.js?v=2.0"></script>
   <script src="/js/navbar.js?v=2.2"></script>
   <style>
     /* ── Invoice Cost Breakdown ─────────────────────────── */
@@ -139,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <h1><span class="platform-name">PO Financing Portal v4</span></h1>
       <small>Client Portal</small>
     </div>
-    <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,0.12)">
+    <div style="padding:12px 16px;border-top:1.5px solid var(--ink-08)">
       <div id="user-badge"></div>
     </div>
     <div class="sidebar-section">
@@ -164,9 +167,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="nav-label">Submit Invoice</span>
       </button>
     </div>
-    <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,0.1);margin-top:auto">
-      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;text-transform:uppercase;font-weight:700">Active Client</div>
-      <select id="client-selector" style="width:100%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:5px 8px;border-radius:6px;font-size:12px" onchange="onClientChange()">
+    <div style="padding:12px 16px 16px;border-top:1.5px solid var(--ink-08);margin-top:auto">
+      <div style="font-size:9px;color:var(--ink-40);margin-bottom:6px;text-transform:uppercase;font-weight:700;letter-spacing:.1em">Active Client</div>
+      <select id="client-selector" class="form-control" style="font-size:12px" onchange="onClientChange()">
         <option value="">Loading…</option>
       </select>
     </div>

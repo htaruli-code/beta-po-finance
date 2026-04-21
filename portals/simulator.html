@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <!-- ============================================================
      simulator.html
-     Version : 1.6
+     Version : 1.7
      Updated : 2026-04-17
      Changes : v1.5 - Version header; cache-busting.
-               v1.6 - Arctic Clarity: styles.css v1.9 + navbar.js v2.2.
+               v1.6 - Arctic Clarity: styles v1.9 + navbar v2.2. Fixed POST->API.call.
+               v1.7 - Fix SIM1: wrapped in standalone-layout with topbar
+                      nav (was bare container div with no navigation).
+                      styles.css now v2.0. styles.css v1.9 + navbar.js v2.2.
                       Fixed: runSimulation() was using raw fetch POST
                       (violates GAS redirect rule). Now uses API.call().
      ============================================================ -->
@@ -13,10 +16,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fee Simulator — PO Financing Portal v4</title>
-  <link rel="stylesheet" href="/css/styles.css?v=1.9">
+  <link rel="stylesheet" href="/css/styles.css?v=2.0">
   <!-- Fix N2: opt-in to auth gate -->
   <script>window.POF_REQUIRE_AUTH = true;</script>
-  <script src="/js/config.js?v=1.9"></script>
+  <script src="/js/config.js?v=2.0"></script>
   <script src="/js/navbar.js?v=2.2"></script>
 </head>
 <body>
@@ -33,7 +36,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
   
-  <div class="container">
+<div class="standalone-layout">
+  <div class="standalone-topbar">
+    <div style="display:flex;align-items:center;gap:0">
+      <div class="logo-word">Fin<span>Ops</span></div>
+      <nav>
+        <a href="?page=ops">Operations</a>
+        <a href="?page=capital">Capital</a>
+        <a href="?page=investor">Investor</a>
+        <a href="?page=simulator" class="active">Simulator</a>
+      </nav>
+    </div>
+    <div id="user-badge"></div>
+  </div>
+
+  <div class="standalone-content">
     <div class="page-header">
       <h1>Fee Simulator</h1>
       <span class="badge badge-info">Stateless — No records created</span>
@@ -169,5 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
     }
   </script>
+  </div><!-- /two-col -->
+  </div><!-- /standalone-content -->
+</div><!-- /standalone-layout -->
 </body>
 </html>

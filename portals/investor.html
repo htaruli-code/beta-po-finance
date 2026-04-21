@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <!-- ============================================================
      investor.html
-     Version : 1.8
+     Version : 1.9
      Updated : 2026-04-17
      Changes : v1.6 - Fix INV1: GET_INVESTOR_INIT batch call, GET not POST.
                v1.7 - Arctic Clarity: styles.css v1.9 + navbar.js v2.2.
-               v1.8 - Fix INV2: hardcoded #A0AEC0 placeholder colours
+               v1.8 - Fix INV2: placeholder hex -> var(--ink-40).
+               v1.9 - Fix INV3: wrapped in standalone-layout with topbar
+                      nav (was bare container div with no navigation).
+                      styles.css now v2.0. hardcoded #A0AEC0 placeholder colours
                       replaced with var(--ink-40).
      ============================================================ -->
 <html>
@@ -13,10 +16,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Investor Portal — PO Financing Portal v4</title>
-  <link rel="stylesheet" href="/css/styles.css?v=1.9">
+  <link rel="stylesheet" href="/css/styles.css?v=2.0">
   <!-- Fix N2: opt-in to auth gate -->
   <script>window.POF_REQUIRE_AUTH = true;</script>
-  <script src="/js/config.js?v=1.9"></script>
+  <script src="/js/config.js?v=2.0"></script>
   <script src="/js/navbar.js?v=2.2"></script>
 </head>
 <body>
@@ -33,10 +36,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<div class="container">
+<div class="standalone-layout">
+  <div class="standalone-topbar">
+    <div style="display:flex;align-items:center;gap:0">
+      <div class="logo-word">Fin<span>Ops</span></div>
+      <nav>
+        <a href="?page=ops">Operations</a>
+        <a href="?page=capital">Capital</a>
+        <a href="?page=investor" class="active">Investor</a>
+        <a href="?page=simulator">Simulator</a>
+      </nav>
+    </div>
+    <div id="user-badge"></div>
+  </div>
+
+  <div class="standalone-content">
   <div class="page-header">
     <h1>Investor Portal</h1>
-    <span class="badge badge-success">Capital & Returns View</span>
+    <span class="badge badge-success">Capital &amp; Returns View</span>
   </div>
 
   <!-- Investor selector -->
@@ -162,5 +179,7 @@ document.getElementById('dist-tbody').innerHTML =
 
 loadPortfolio();
 </script>
+</div><!-- /standalone-content -->
+</div><!-- /standalone-layout -->
 </body>
 </html>

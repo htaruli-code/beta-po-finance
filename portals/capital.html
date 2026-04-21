@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <!-- ============================================================
      capital.html
-     Version : 1.8
+     Version : 1.9
      Updated : 2026-04-17
      Changes : v1.6 - Fix CAP1: GET_CAPITAL_INIT batch call, GET not POST.
                v1.7 - Arctic Clarity: styles.css v1.9 + navbar.js v2.2.
-               v1.8 - Fix CAP2: hardcoded hex colours in JS templates
+               v1.8 - Fix CAP2: inline hex -> Arctic tokens.
+               v1.9 - Fix CAP3: wrapped in standalone-layout with topbar
+                      nav (was bare container div with no navigation).
+                      styles.css now v2.0. hardcoded hex colours in JS templates
                       replaced with Arctic tokens. #1B4F72→var(--ink),
                       #2980B9/#8E44AD/#E67E22→Arctic layer colours,
                       #EDF2F7→var(--ink-08), #38A169→var(--success).
@@ -15,10 +18,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Capital Dashboard — PO Financing Portal v4</title>
-  <link rel="stylesheet" href="/css/styles.css?v=1.9">
+  <link rel="stylesheet" href="/css/styles.css?v=2.0">
   <!-- Fix N2: opt-in to auth gate -->
   <script>window.POF_REQUIRE_AUTH = true;</script>
-  <script src="/js/config.js?v=1.9"></script>
+  <script src="/js/config.js?v=2.0"></script>
   <script src="/js/navbar.js?v=2.2"></script>
 </head>
 <body>
@@ -35,11 +38,27 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<div class="container">
+<div class="standalone-layout">
+  <div class="standalone-topbar">
+    <div style="display:flex;align-items:center;gap:0">
+      <div class="logo-word">Fin<span>Ops</span></div>
+      <nav>
+        <a href="?page=ops">Operations</a>
+        <a href="?page=capital" class="active">Capital</a>
+        <a href="?page=simulator">Simulator</a>
+        <a href="?page=admin">Admin</a>
+      </nav>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="btn btn-ghost btn-sm" onclick="loadAll()">↻ Refresh</button>
+      <div id="user-badge"></div>
+    </div>
+  </div>
+
+  <div class="standalone-content">
   <div class="page-header">
     <h1>Capital Dashboard</h1>
     <span class="badge badge-info">Waterfall View</span>
-    <button class="btn btn-sm" style="margin-left:auto" onclick="loadAll()">↻ Refresh</button>
   </div>
 
   <!-- Total capacity bar -->
@@ -175,5 +194,7 @@ async function simulateWaterfall() {
 
 loadAll();
 </script>
+</div><!-- /standalone-content -->
+</div><!-- /standalone-layout -->
 </body>
 </html>

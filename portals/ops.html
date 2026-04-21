@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <!-- ============================================================
      ops.html
-     Version : 2.0
+     Version : 2.1
      Updated : 2026-04-17
      Changes : Fix OH5 — loadClientInvoicesForPayment() 1 batch call.
                Fix OH6 — refreshDashboard() 1 batch call GET_OPS_DASHBOARD.
                Fix OH7 — init() 1 batch call GET_OPS_INIT.
-               v2.0  -- Arctic Clarity: styles.css v1.9 + navbar.js v2.2.
+               v2.0  -- Arctic Clarity: styles v1.9 + navbar v2.2.
+               v2.1  -- Fix OPS1: dark sidebar user-badge border replaced
+                         with var(--ink-08). styles.css now v2.0. styles.css v1.9 + navbar.js v2.2.
                         All visual changes via styles.css token replacement.
                         Inline var() refs (--navy, --mgray, etc) continue
                         to work via semantic aliases in new styles.css.
@@ -16,10 +18,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ops Dashboard — PO Financing Portal v4</title>
-  <link rel="stylesheet" href="/css/styles.css?v=1.9">
+  <link rel="stylesheet" href="/css/styles.css?v=2.0">
   <!-- Fix N2: opt-in to auth gate -->
   <script>window.POF_REQUIRE_AUTH = true;</script>
-  <script src="/js/config.js?v=1.9"></script>
+  <script src="/js/config.js?v=2.0"></script>
   <script src="/js/navbar.js?v=2.2"></script>
 </head>
 <body>
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <h1><span class="platform-name">PO Financing Portal v4</span></h1>
       <small id="portal-subtitle">Operations Portal</small>
     </div>
-    <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,0.12)">
+    <div style="padding:12px 16px;border-top:1.5px solid var(--ink-08)">
       <div id="user-badge"></div>
     </div>
     <div class="sidebar-section">
