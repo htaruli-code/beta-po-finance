@@ -1,9 +1,13 @@
 /* ============================================================
    styles.css
-   Version : 1.9
+   Version : 2.0
    Updated : 2026-04-17
    Changes :
      v1.9 -- Arctic Clarity redesign.
+     v2.0 -- Fix UI1: added kpi colour variants (red/amber/green/blue),
+             kpi-card with colour variants, card-grid-2/3/4, and
+             standalone-layout/topbar/content classes. All classes
+             used across ops/client/admin/capital/investor pages.
              New CSS token set (--ink, --blue, --base, etc).
              Cabinet Grotesk + Instrument Sans + DM Mono fonts.
              Sidebar, topbar, card, button, badge, table, modal,
@@ -855,3 +859,92 @@ code {
   color: var(--ink-40);
 }
 .placeholder-icon { font-size: 40px; margin-bottom: 12px; }
+
+/* ── KPI COLOUR VARIANTS (ops.html, client.html, admin.html) ─ */
+.kpi.red   { border-color: rgba(196,31,59,0.2);  background: var(--danger-lt); }
+.kpi.red   .kpi-value { color: var(--danger); }
+.kpi.amber { border-color: rgba(180,83,9,0.2);   background: var(--warn-lt); }
+.kpi.amber .kpi-value { color: var(--warn); }
+.kpi.green { border-color: rgba(15,123,74,0.2);  background: var(--success-lt); }
+.kpi.green .kpi-value { color: var(--success); }
+.kpi.blue  { border-color: var(--blue-md);       background: var(--blue-lt); }
+.kpi.blue  .kpi-value { color: var(--blue); }
+
+/* ── KPI-CARD (capital.html, investor.html legacy classes) ─── */
+/* Maps old .kpi-card coloured variants to Arctic tokens        */
+.kpi-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  border: 1.5px solid var(--ink-08);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 20px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.kpi-card:hover {
+  border-color: var(--blue-md);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.kpi-card .kpi-label {
+  font-size: 11px; font-weight: 500; color: var(--ink-40);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.kpi-card .kpi-value {
+  font-family: var(--ff-display); font-size: 24px; font-weight: 800;
+  color: var(--ink); letter-spacing: -0.03em; line-height: 1;
+}
+.kpi-card.blue   { border-color: var(--blue-md);              background: var(--blue-lt); }
+.kpi-card.blue   .kpi-value { color: var(--blue); }
+.kpi-card.purple { border-color: rgba(109,40,217,0.2);        background: var(--purple-lt); }
+.kpi-card.purple .kpi-value { color: var(--purple); }
+.kpi-card.green  { border-color: rgba(15,123,74,0.2);         background: var(--success-lt); }
+.kpi-card.green  .kpi-value { color: var(--success); }
+.kpi-card.orange { border-color: rgba(217,119,6,0.2);         background: var(--amber-lt); }
+.kpi-card.orange .kpi-value { color: var(--amber-val); }
+
+/* ── CARD-GRID VARIANTS (capital.html, investor.html) ────────── */
+.card-grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-bottom: 20px; }
+.card-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+.card-grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 20px; }
+@media (max-width: 900px) {
+  .card-grid-4 { grid-template-columns: repeat(2,1fr); }
+  .card-grid-3 { grid-template-columns: repeat(2,1fr); }
+  .card-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ── STANDALONE PAGES (capital, investor, simulator) ─────────── */
+/* These pages have no sidebar — use full-width layout            */
+.standalone-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.standalone-topbar {
+  background: var(--white);
+  border-bottom: 1.5px solid var(--ink-08);
+  box-shadow: var(--shadow-xs);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+.standalone-topbar .logo-word {
+  font-family: var(--ff-display);
+  font-size: 17px; font-weight: 900;
+  color: var(--ink); letter-spacing: -0.03em;
+}
+.standalone-topbar .logo-word span { color: var(--blue); }
+.standalone-topbar nav { display: flex; gap: 4px; margin-left: 24px; }
+.standalone-topbar nav a {
+  padding: 7px 14px; border-radius: var(--r-sm);
+  font-size: 12px; font-weight: 500;
+  color: var(--ink-70); text-decoration: none;
+  transition: all 0.15s;
+}
+.standalone-topbar nav a:hover { background: var(--ink-04); color: var(--ink); }
+.standalone-topbar nav a.active { background: var(--blue-lt); color: var(--blue); font-weight: 600; }
+.standalone-content { padding: 28px 32px; flex: 1; }
